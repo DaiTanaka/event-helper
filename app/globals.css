@@ -1,26 +1,91 @@
 @import "tailwindcss";
 
+/* Piqtonブランドカラーをorange-500として登録 */
+@theme {
+  --color-orange-50:  #fff4ef;
+  --color-orange-100: #ffe4d5;
+  --color-orange-200: #ffc8a8;
+  --color-orange-300: #ff9e6e;
+  --color-orange-400: #ff8048;
+  --color-orange-500: #ff6b2b;
+  --color-orange-600: #e8521a;
+  --color-orange-700: #c04010;
+  --color-orange-800: #9a330c;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #f8fafc;
+  --foreground: #1e293b;
+  --brand: #ff6b2b;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+}
+
+/* 時刻入力のブラウザ標準時計アイコンを非表示（カスタムボタンを使用） */
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* 印刷用スタイル */
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  body {
+    background: white;
+    font-size: 10pt;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-break-before {
+    page-break-before: always;
+  }
+
+  .print-avoid-break {
+    page-break-inside: avoid;
+  }
+
+  nav, header, button, a[href] {
+    display: none;
+  }
+
+  .print-show {
+    display: block !important;
+  }
+
+  /* 準備リスト（/try）印刷対応：fixed配置を解除してスクロール内容を全表示 */
+  .try-content {
+    position: static !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .try-scroll {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid #666;
+    padding: 4pt 6pt;
+    font-size: 9pt;
+  }
+
+  h1 { font-size: 16pt; }
+  h2 { font-size: 13pt; }
+  h3 { font-size: 11pt; }
 }
